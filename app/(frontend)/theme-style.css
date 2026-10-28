@@ -1,0 +1,129 @@
+/* ========================================
+ * THEME-STYLE.CSS - Frontend Style Variables
+ * Kus Koláče Artisanal Bakery Storefront
+ * ======================================== */
+:root {
+  /* 字体字号 */
+  --font-size-display: 60px;
+  --font-size-h1: 48px;
+  --font-size-h2: 36px;
+  --font-size-h3: 28px;
+  --font-size-h4: 22px;
+  --font-size-base: 17px;
+  --font-size-sm-body: 15px;
+  --font-size-caption: 13px;
+
+  /* 字体字重 */
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+
+  /* 行高 */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.35;
+  --line-height-relaxed: 1.5;
+  --line-height-loose: 1.65;
+
+  /* 字间距 */
+  --letter-spacing-tight: -0.015em;
+  --letter-spacing-normal: -0.005em;
+  --letter-spacing-base: 0;
+  --letter-spacing-wide: 0.015em;
+
+  /* 基础色彩 */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* 语义化颜色映射 */
+  --color-background: #fbf8f3;
+  --color-foreground: #261e19;
+  --color-card: #fdfbf7;
+  --color-card-foreground: #261e19;
+  --color-popover: #fdfbf7;
+  --color-popover-foreground: #261e19;
+
+  /* 主色调 */
+  --color-primary: #8b3a1a;
+  --color-primary-foreground: #fffdfa;
+
+  /* 次要色彩 */
+  --color-secondary: #ece5d8;
+  --color-secondary-foreground: #261e19;
+
+  /* 静音色彩 */
+  --color-muted: #f3eee6;
+  --color-muted-foreground: #5c4f45;
+
+  /* 强调色 */
+  --color-accent: #234235;
+  --color-accent-foreground: #fffdfa;
+
+  /* 功能性颜色 */
+  --color-destructive: #b91c1c;
+  --color-destructive-foreground: #ffffff;
+  --color-success: #047857;
+  --color-success-foreground: #ffffff;
+  --color-warning: #b45309;
+  --color-warning-foreground: #ffffff;
+  --color-info: #1d4ed8;
+  --color-info-foreground: #ffffff;
+
+  /* 边框和输入框 */
+  --color-border: #dfd5c6;
+  --color-input: #dfd5c6;
+  --color-ring: #8b3a1a;
+
+  /* 图表色系 */
+  --color-chart-1: #8b3a1a;
+  --color-chart-2: #234235;
+  --color-chart-3: #b45309;
+  --color-chart-4: #5c4f45;
+  --color-chart-5: #a89f91;
+
+  /* 侧边栏相关颜色 */
+  --color-sidebar-background: #f7f3eb;
+  --color-sidebar-foreground: #261e19;
+  --color-sidebar-primary: #8b3a1a;
+  --color-sidebar-primary-foreground: #fffdfa;
+  --color-sidebar-accent: #ece5d8;
+  --color-sidebar-accent-foreground: #261e19;
+  --color-sidebar-border: #dfd5c6;
+  --color-sidebar-ring: #8b3a1a;
+
+  /* 交互态颜色 (Hover/Active) */
+  --color-primary-hover: #753015;
+  --color-secondary-hover: #dfd5c6;
+  --color-accent-hover: #1b3329;
+  --color-destructive-hover: #991b1b;
+
+  /* 链接颜色 */
+  --color-link: #8b3a1a;
+  --color-link-hover: #753015;
+
+  /* 骨架屏/加载态 */
+  --color-skeleton: #ece5d8;
+
+  /* 代码块 */
+  --color-code-background: #f3eee6;
+  --color-code-foreground: #261e19;
+
+  /* 引用块 */
+  --color-blockquote-border: #dfd5c6;
+  --color-blockquote-background: #f3eee6;
+}
+
+/* theme autofill contract:start */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-foreground) !important;
+  caret-color: var(--color-foreground);
+}
+
+input:autofill {
+  color: var(--color-foreground) !important;
+  caret-color: var(--color-foreground);
+}
+/* theme autofill contract:end */

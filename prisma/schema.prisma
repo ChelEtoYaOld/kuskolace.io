@@ -1,0 +1,170 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../prisma-generated/client"
+}
+
+generator json {
+  provider = "prisma-json-types-generator"
+  allowAny = false
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountUserRole {
+  CUSTOMER
+  ADMIN
+}
+
+enum OpeningDayKey {
+  PO
+  UT
+  ST
+  CT
+  PA
+  SO
+  NE
+}
+
+enum InstagramSyncStatus {
+  AUTORIZOVANO
+  NEPROPOJENO
+  NAHLEDOVY_REZIM
+}
+
+enum InstagramFeedMode {
+  API
+  FALLBACK
+}
+
+enum PastryCategory {
+  OVOCNE_KOLACE
+  KYNUTE_BUCHTY_A_LOUPAKY
+  SLANE_PECIVO
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  READY
+  COMPLETED
+  CANCELLED
+}
+
+model AccountUser {
+  id           String          @id @default(uuid()) @db.VarChar(72)
+  email        String          @unique @db.VarChar(255)
+  passwordHash String          @db.VarChar(255)
+  fullName     String          @db.VarChar(255)
+  phone        String?         @db.VarChar(50)
+  role         AccountUserRole @default(ADMIN)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@map("account_users")
+}
+
+model BusinessFacts {
+  id                String   @id @default(uuid()) @db.VarChar(72)
+  name              String   @default("Kus Koláče") @db.VarChar(255)
+  streetAddress     String   @default("Korunní 90") @db.VarChar(255)
+  cityZip           String   @default("101 00 Vinohrady, Praha 2") @db.VarChar(255)
+  phone             String   @default("608 903 828") @db.VarChar(50)
+  email             String   @default("info@kuskolace.cz") @db.VarChar(255)
+  priceRangeCzk     String   @default("100–200 Kč") @db.VarChar(50)
+  ratingScore       Decimal  @default(4.7) @db.Decimal(3, 1)
+  reviewsCount      Int      @default(1265)
+  takeawayAvailable Boolean  @default(true)
+  deliveryAvailable Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("business_facts")
+}
+
+model OpeningHour {
+  id        String        @id @default(uuid()) @db.VarChar(72)
+  dayKey    OpeningDayKey @unique
+  dayName   String        @db.VarChar(50)
+  isOpen    Boolean       @default(true)
+  openTime  String        @db.VarChar(10)
+  closeTime String        @db.VarChar(10)
+  note      String?       @db.VarChar(255)
+  sortOrder Int           @default(1)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@map("opening_hours")
+}
+
+model CmsConfig {
+  id                 String   @id @default(uuid()) @db.VarChar(72)
+  welcomeHeading     String   @db.VarChar(255)
+  welcomePreamble    String   @db.Text
+  storyTitle         String   @db.VarChar(255)
+  storyBody          String   @db.Text
+  isStoryVisible     Boolean  @default(true)
+  isShowcaseVisible  Boolean  @default(true)
+  isInstagramVisible Boolean  @default(true)
+  isContactVisible   Boolean  @default(true)
+  isWebPublished     Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("cms_configs")
+}
+
+model InstagramConfig {
+  id            String              @id @default(uuid()) @db.VarChar(72)
+  accountHandle String              @default("@kuskolace") @db.VarChar(100)
+  syncStatus    InstagramSyncStatus @default(NEPROPOJENO)
+  autoSync      Boolean             @default(false)
+  feedMode      InstagramFeedMode   @default(FALLBACK)
+  lastSyncAt    String?             @db.VarChar(100)
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  @@map("instagram_configs")
+}
+
+model PastryItem {
+  id               String          @id @default(uuid()) @db.VarChar(72)
+  itemCode         String?         @db.VarChar(50)
+  name             String          @db.VarChar(255)
+  category         PastryCategory
+  priceCzk         Int
+  shortDescription String          @db.VarChar(500)
+  fullDescription  String?         @db.Text
+  /// Seznam použitých surovin
+  /// ![Array<string>]
+  ingredients      Json
+  /// Seznam alergenů s číselnými kódy
+  /// ![Array<string>]
+  allergens        Json
+  photoKey         String          @db.VarChar(700)
+  isTodaySpecial   Boolean         @default(false)
+  isSoldOut        Boolean         @default(false)
+  freshnessLabel   String          @db.VarChar(100)
+  displayOrder     Int             @default(0)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@map("pastry_items")
+}
+
+model InstagramPost {
+  id             String   @id @default(uuid()) @db.VarChar(72)
+  caption        String   @db.Text
+  photoKey       String   @db.VarChar(700)
+  postUrl        String   @db.VarChar(500)
+  publishedLabel String   @db.VarChar(100)
+  likesCount     Int      @default(0)
+  isFeatured     Boolean  @default(false)
+  isFromApi      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("instagram_posts")
+}
