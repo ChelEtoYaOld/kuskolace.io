@@ -2,4 +2,6 @@
 
 Webová prezentace řemeslné pekárny Kus Koláče v Praze.
 
-Projekt zahrnuje nabídku pečiva, příběh pekárny, fotogalerii, otevírací dobu a kontaktní informace.
+**[Otevřít náhled webu](https://cheletoyaold.github.io/kuskolace.io/)**
+
+Projekt zahrnuje nabídku pečiva, příběh pekárny, fotogalerii a kontaktní informace.
